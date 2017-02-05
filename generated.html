@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>generated xseql</title>
+        <link rel="stylesheet" type="text/css" href="resources/style_basic.css" title="basic"/>
+        <link rel="alternate stylesheet" type="text/css" href="resources/style.css" title="colour"/>
+
+        <script src="resources/splitLines.js"></script>
+        <script>
+        
+            function loadXMLDoc(filename)
+            {
+                if (window.ActiveXObject)
+                  {
+                    xhttp = new ActiveXObject("Msxml2.XMLHTTP");
+                  }
+                else
+                  {
+                    xhttp = new XMLHttpRequest();
+                  }
+                xhttp.open("GET", filename, false);
+                try {xhttp.responseType = "msxml-document"} catch(err) {} // Helping IE11
+                    xhttp.send("");
+                    return xhttp.responseXML;
+            }
+    
+            function displayResult(aFilePath)
+            {
+                var filePath = aFilePath;
+                console.log(filePath);
+                
+                xml = loadXMLDoc(filePath);
+                xsl = loadXMLDoc("resources/stylesheet_client.xsl");
+                // code for IE
+                if (window.ActiveXObject || xhttp.responseType == "msxml-document")
+                  {
+                    ex = xml.transformNode(xsl);
+                    document.getElementById("example").innerHTML = ex;
+                  }
+                // code for Chrome, Firefox, Opera, etc.
+                else if (document.implementation && document.implementation.createDocument)
+                  {
+                    xsltProcessor = new XSLTProcessor();
+                    xsltProcessor.importStylesheet(xsl);
+                    resultDocument = xsltProcessor.transformToFragment(xml, document);
+                    document.getElementById("example").appendChild(resultDocument);
+                  }
+    
+                x = document.getElementsByClassName("residues");
+                for (i = 0; i < x.length; i++)
+                {
+                    var currentResidues = getSplitString(x[i].innerHTML);
+    
+                    x[i].innerHTML = currentResidues;
+                }
+            }
+    
+        </script>
+    </head>
+    <!--<body onload="displayResult('file1.xml')">-->
+    <body onload="displayResult('Guidance_document_SEQL.xml')">
+        <h1>ST26 SEQUENCE LISTING with client XSLT</h1>
+        <div id="example"/>
+    </body>
+</html>
