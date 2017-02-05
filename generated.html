@@ -24,9 +24,9 @@
                     return xhttp.responseXML;
             }
     
-            function displayResult(aFilePath)
+            function displayResult()
             {
-                var filePath = aFilePath;
+                var filePath = "Guidance_document_SEQL.xml";
                 console.log(filePath);
                 
                 xml = loadXMLDoc(filePath);
@@ -58,7 +58,8 @@
         </script>
     </head>
     <!--<body onload="displayResult('file1.xml')">-->
-    <body onload="displayResult('Guidance_document_SEQL.xml')">
+    <!--<body onload="displayResult('Guidance_document_SEQL.xml')">-->
+    <body onload="displayResult()">
         <h1>ST26 SEQUENCE LISTING with client XSLT</h1>
         <div id="example"/>
     </body>
