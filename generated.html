@@ -43,7 +43,7 @@
                     xsltProcessor = new XSLTProcessor();
                     xsltProcessor.importStylesheet(xsl);
                     resultDocument = xsltProcessor.transformToFragment(xml, document);
-                    document.getElementById("example").appendChild(resultDocument);
+                    document.getElementById("seql").appendChild(resultDocument);
                   }
     
                 x = document.getElementsByClassName("residues");
@@ -60,6 +60,6 @@
     <!--<body onload="displayResult('file1.xml')">-->
     <body onload="displayResult('Guidance_document_SEQL.xml')">
         <h1>ST26 SEQUENCE LISTING with client XSLT</h1>
-        <div id="example"/>
+        <div id="seql"/>
     </body>
 </html>
